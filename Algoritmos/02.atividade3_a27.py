@@ -47,9 +47,10 @@ try:
     # Exibindo os dados
     df_dados_lazy = (
         df_dados_lazy
-        #.group_by('regiao','total_vendas')
+        .group_by('regiao') # agrupar por regiao
         .agg([
             pl.col("produto").value_counts().first().alias("Produto mais vendido"),
+            pl.col("forma_pagamento").value_counts().first().alias("Metodo de pagamento mais usado"),
             ((pl.col("quantidade")*pl.col("preco")).mean()).alias("Valor médio Vendas")
         ])
     )

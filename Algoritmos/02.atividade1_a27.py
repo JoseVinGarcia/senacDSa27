@@ -16,9 +16,9 @@ try:
 
     df_dados_lazy = (
         df_dados_lazy
-        .filter(pl.col('regiao') == "SP")
-        .group_by('forma_pagamento')
-        .agg((pl.col('total_vendas') * pl.col('preco')).sum().alias('total de vendas por pagamento'))
+        .filter(pl.col('regiao') == "SP") # Filtrar vendas por regiao SP
+        .group_by('forma_pagamento') # Agrupar por forma de pagamento
+        .agg((pl.col('quantidade') * pl.col('preco')).sum().alias('total de vendas')) # Calcular total de vendas
     )
 
     # Coletar os dados após a execução

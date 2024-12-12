@@ -14,41 +14,11 @@ try:
     # Exibindo os dados
     df_dados_lazy = df_dados.lazy()
 
-    # Filtrando os resultados 1
-    # df_dados_lazy = (
-    #     df_dados_lazy
-    #     .group_by('produto')
-    #     .agg((pl.col('quantidade') * pl.col('preco')).sum().alias('total'))
-    # )
-
-    # Filtrando os resultados 2
-    # df_dados_lazy = (
-    #     df_dados_lazy
-    #     .filter((pl.col('quantidade')*pl.col('preco'))>3500)
-    # )
-
-    # Filtrando os resultados 3
-    # df_dados_lazy = (
-    #     df_dados_lazy
-    #     .filter(pl.col('preco') > 1500)
-    #     .select(['produto', 'preco', 'quantidade', 'regiao'])
-    # )
-
-    # Filtrando os resultados (Final)
-    # ALIAS é um nome gerado para a coluna dos resultados
-    # df_dados_lazy = (
-    #     df_dados_lazy
-    #     .filter(pl.col('preco') > 1500)
-    #     .select(['produto', 'preco', 'quantidade'])
-    #     .group_by('produto')
-    #     .agg((pl.col('quantidade') * pl.col('preco')).sum().alias('total'))
-    # )
-
     df_dados_lazy = (
         df_dados_lazy
-        .filter(pl.col("preco")>1000)
-        .group_by(("regiao","forma_pagamento"))
-        .agg(pl.col("total_vendas").sum().alias('total de vendas'))
+        .filter(pl.col("total_vendas") > 1000) # Filtrando por valor
+        .group_by(["regiao","forma_pagamento"]) # Agrupando por regiao e forma de pagamento
+        .agg(pl.col("quantidade").sum().alias('total de quantidade')) # Agregando 
     )
 
     # Mostrar o plano de execução
