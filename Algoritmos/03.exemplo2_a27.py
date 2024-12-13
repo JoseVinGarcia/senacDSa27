@@ -58,7 +58,7 @@ except ImportError as e:
 
 # GRAFICO
 try:
-    # plotar grafico
+    # plotar gráfico de dispersão
     plt.scatter(df_total_veiculos['roubo_veiculo'],df_total_veiculos["recuperacao_veiculos"])
     plt.title(f"Correlação:\n{correlacao}")
     plt.xlabel("Roubo de veiculos")
