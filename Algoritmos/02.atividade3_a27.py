@@ -51,7 +51,7 @@ try:
         .agg([
             pl.col("produto").value_counts().first().alias("Produto mais vendido"),
             pl.col("forma_pagamento").value_counts().first().alias("Metodo de pagamento mais usado"),
-            ((pl.col("quantidade")*pl.col("preco")).mean()).alias("Valor médio Vendas")
+            ((pl.col("quantidade")*pl.col("preco")).mean()).alias("Valor médio Vendas") # Podemos fazer so com a coluna total_vendas por ex
         ])
     )
 
